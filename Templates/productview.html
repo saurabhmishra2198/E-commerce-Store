@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title  %} {{product.product_name}} - My Cart{% endblock title %}
+{% block body %}
+<div class="container my-4">
+    <div class="row">
+    <div class="col-md-4">
+    <div class="row">
+       <img src="/media/{{product.image}}" width="233px", height="154px;">
+    </div>
+        <div class="row my-4">
+            <button class="btn btn-primary mx-3">Buy Now</button>
+            <button class="btn btn-primary">Add To Cart</button>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h5>{{product.product_name}}</h5>
+        <p><b>Rs.{{product.price}}</b></p>
+        <p>{{product.desc}}</p>
+    </div>
+    </div>
+</div>
+{% endblock body %}
+
+{% block js %}
+<script>
+console.log('working')
+if(localStorage.getItem('C') == null)
+{
+var C={};
+}
+else{
+C= JSON.parse(localStorage.getItem('C'));
+document.getElementById('C').innerHTML = Object.keys(C).length;
+}
+//jQuery starts here//
+$('.C').click(function(){
+
+console.log('clicked');
+var idstr= this.id.toString();
+console.log(idstr);
+if(C[idstr]!= undefined) {
+C[idstr] = C[idstr]+1;
+}
+else{
+C[idstr] = 1;
+}
+console.log(C);
+localStorage.setItem('C', JSON.stringify(C));
+document.getElementById('C').innerHTML = Object.keys(C).length;
+});
+$('#popc').popover();
+document.getElementById("popc").setAttribute('data-content', '<h5>Cart</h5>');
+</script>
+{% endblock js %}

@@ -1,0 +1,102 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>{% block title %} {% endblock title %} | Shop</title>
+	  <link rel="shortcut icon" type="image/png" href="/static/img/logo.png">
+    {% block css %} {% endblock css %}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v8.0" nonce="yChWhlaS"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/"><img src="/static/img/logo.png" class="rounded-circle" style="width: 70px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item text-white">
+        <a class="nav-link text-white" href="/services">Services</a>
+      </li>
+      <li class="nav-item text-white">
+        <a class="nav-link text-white" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="/blog">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="/contact" tabindex="-1" aria-disabled="true">Contact</a>
+      </li>
+      
+    </ul>
+    <form method="get" action="/search" class="form-inline my-2 my-lg-0 mr-3">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <button type="button" class="btn btn-secondary mx-2" id="popc" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
+     sagittis lacus vel augue laoreet rutrum faucibus.">
+    Cart(<span id="C">0</span>)
+    </button>
+    </div>
+      {% if user.is_authenticated %}
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Welcome {{request.user}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/tracker">Tracker</a>
+          <a class="dropdown-item" href="#">Your Order</a>
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+        </div>
+      {% else %}
+        <button class="btn btn-outline-success mr-2 my-sm-0" type="submit" data-toggle="modal"
+          data-target="#register">Register</button>
+        <button class="btn btn-outline-success mr-2 my-sm-0" type="submit" data-toggle="modal"
+        data-target="#login">Login</button>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
+  <strong>{{ message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+
+{% block body %} {% endblock body %}
+
+<hr>
+
+<footer class="container-fluid bg-dark my-0 py-3 text-light">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>&copy; 2020-2021 CodeWithSaurabh | <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+</footer>
+
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+{% block js %}{% endblock js %}
+
+</body>
+</html>
